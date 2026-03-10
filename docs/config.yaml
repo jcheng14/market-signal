@@ -1,0 +1,64 @@
+# Prediction Market Intelligence Brief — Configuration
+# See docs/PRD.md for full product requirements
+
+meta:
+  name: "Prediction Market Intelligence Brief"
+  version: "1.0"
+  author: "Felix Cheng"
+  schedule: "twice_weekly"  # Mon & Thu
+  language: "zh-CN"
+  output_format: "markdown"
+
+topics:
+  - id: "ai_career"
+    name: "AI & Tech Impact"
+    polls_per_issue: [5, 10]
+    keywords:
+      polymarket: ["AI", "AGI", "OpenAI", "Anthropic", "Google AI", "IPO", "tech", "layoffs", "bubble"]
+      kalshi: ["artificial intelligence", "technology", "employment", "jobs", "layoffs"]
+      manifold: ["AGI", "AI bubble", "OpenAI", "Anthropic", "Claude", "GPT", "remote work", "tech layoffs", "AI regulation"]
+
+  - id: "global_trade"
+    name: "Geopolitics & Cross-border Trade"
+    polls_per_issue: [5, 10]
+    keywords:
+      polymarket: ["recession", "Fed", "tariff", "trade", "Iran", "China", "oil", "TikTok", "sanctions", "Ukraine"]
+      kalshi: ["recession", "interest rate", "inflation", "CPI", "trade deal", "tariff", "gas price", "unemployment", "GDP"]
+      manifold: ["US recession", "trade war", "China", "TikTok ban", "supply chain", "dollar", "oil price"]
+
+  - id: "web3_crypto"
+    name: "Web3 & Crypto"
+    polls_per_issue: [5, 10]
+    keywords:
+      polymarket: ["Bitcoin", "Ethereum", "crypto", "DeFi", "stablecoin", "SpaceX IPO", "Coinbase"]
+      kalshi: ["BTC", "ETH", "SOL", "crypto", "Bitcoin"]
+      manifold: ["Bitcoin", "Ethereum", "crypto regulation", "DeFi", "web3", "stablecoin", "NFT"]
+
+platforms:
+  polymarket:
+    base_url: "https://gamma-api.polymarket.com"
+    auth_required: false
+    min_volume_usd: 50000
+    rate_limit: "100/min"
+  kalshi:
+    base_url: "https://api.elections.kalshi.com/trade-api/v2"
+    auth_required: true
+    min_volume_usd: 30000
+    rate_limit: "tiered"
+  manifold:
+    base_url: "https://api.manifold.markets/v0"
+    auth_required: false
+    min_traders: 30
+    rate_limit: "500/min"
+
+filtering:
+  min_probability_change_7d: 5
+  highlight_threshold_7d: 10
+  settlement_window_days: [7, 90]
+  cross_platform_bonus: true
+
+output:
+  include_dashboard: true
+  include_content_ideas: true
+  include_cross_platform_diff: true
+  file_naming: "brief_{date}.md"

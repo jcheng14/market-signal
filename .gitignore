@@ -1,0 +1,4 @@
+.env
+*.kalshi-credentials
+.claude/settings.local.json
+.DS_Store
